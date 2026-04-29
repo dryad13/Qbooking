@@ -13,8 +13,7 @@ export function CustomerHeader({ backLabel, backHref }: CustomerHeaderProps) {
     <header className="sticky top-0 z-50 w-full border-b bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/60">
       <div className="flex h-16 items-center px-4 md:px-6 max-w-6xl mx-auto">
         <Link href="/" className="flex items-center gap-2 mr-auto">
-          <Image src="/logo.jpeg" alt="99 Cattle Farm" width={36} height={36} className="rounded-md" />
-          <span className="font-bold text-lg text-primary hidden sm:block">99 Cattle Farm</span>
+          <Image src="/logo.jpeg" alt="99 Cattle Farm" width={52} height={52} className="rounded-md" />
         </Link>
 
         {backHref && (
