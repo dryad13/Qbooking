@@ -6,6 +6,8 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { createBooking } from "@/server/actions/booking";
 import { Check, Info } from "lucide-react";
+import { CustomerHeader } from "@/components/CustomerHeader";
+import { BookingProgress } from "@/components/BookingProgress";
 
 const PRICE_NORMAL = 45000;
 const PRICE_PREMIUM = 65000;
@@ -44,8 +46,14 @@ export default function BookingNewPage() {
   }
 
   return (
-    <div className="flex justify-center min-h-[calc(100vh-4rem)] bg-muted/30 px-4 py-8">
-      <div className="w-full max-w-4xl grid md:grid-cols-3 gap-6">
+    <div className="min-h-screen bg-muted/30">
+      <CustomerHeader />
+      <div className="flex justify-center px-4 py-8">
+      <div className="w-full max-w-4xl">
+        <div className="mb-4">
+          <BookingProgress currentStep={1} />
+        </div>
+      <div className="grid md:grid-cols-3 gap-6">
         
         {/* Form Section */}
         <div className="md:col-span-2 space-y-6">
@@ -186,6 +194,8 @@ export default function BookingNewPage() {
             </Card>
           </div>
         </div>
+      </div>
+      </div>
       </div>
     </div>
   );

@@ -8,6 +8,8 @@ import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { submitKyc } from "@/server/actions/kyc";
 import { Camera, FileText } from "lucide-react";
+import { CustomerHeader } from "@/components/CustomerHeader";
+import { BookingProgress } from "@/components/BookingProgress";
 
 export default function KycUploadPage({ params }: { params: { ref: string } }) {
   const [loading, setLoading] = useState(false);
@@ -33,8 +35,12 @@ export default function KycUploadPage({ params }: { params: { ref: string } }) {
   }
 
   return (
-    <div className="flex justify-center min-h-[calc(100vh-4rem)] bg-muted/30 px-4 py-8">
-      <Card className="w-full max-w-lg shadow-lg">
+    <div className="min-h-screen bg-muted/30">
+      <CustomerHeader backHref="/" backLabel="Home" />
+      <div className="flex justify-center px-4 py-8">
+        <div className="w-full max-w-lg">
+          <BookingProgress currentStep={2} status="awaiting_kyc" />
+          <Card className="w-full shadow-lg mt-4">
         <form onSubmit={handleSubmit}>
           <CardHeader className="space-y-2 border-b bg-muted/30 pb-6">
             <CardTitle className="text-2xl font-bold flex items-center gap-2">
@@ -115,7 +121,9 @@ export default function KycUploadPage({ params }: { params: { ref: string } }) {
             </Button>
           </CardFooter>
         </form>
-      </Card>
+          </Card>
+        </div>
+      </div>
     </div>
   );
 }

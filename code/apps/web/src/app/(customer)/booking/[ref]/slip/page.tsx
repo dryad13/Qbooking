@@ -2,6 +2,9 @@ import { getAdminPb, getUserPb } from "@/server/pb";
 import { QRCodeSVG } from "qrcode.react";
 import { PrintButton } from "@/components/PrintButton";
 
+const CUTTING_ADDON = 2500;
+const DELIVERY_ADDON = 3500;
+
 export default async function SlipPage({ params }: { params: { ref: string } }) {
   const pb = await getUserPb();
   if (!pb.authStore.isValid) {
@@ -53,7 +56,7 @@ export default async function SlipPage({ params }: { params: { ref: string } }) 
           </div>
           <div className="text-right">
             <p className="text-xs uppercase font-bold text-gray-500 mb-1">Status</p>
-            <p className="font-bold text-lg text-green-700 uppercase">{booking.status.replace('_', ' ')}</p>
+            <p className="font-bold text-lg text-green-700 uppercase">{booking.status.replaceAll('_', ' ')}</p>
           </div>
         </div>
 
@@ -77,14 +80,14 @@ export default async function SlipPage({ params }: { params: { ref: string } }) 
                 <tr className="border-b">
                   <td className="py-3">Cutting Service</td>
                   <td className="py-3 text-right">-</td>
-                  <td className="py-3 text-right">Included Add-on</td>
+                  <td className="py-3 text-right">Rs. {CUTTING_ADDON.toLocaleString()}</td>
                 </tr>
               )}
               {booking.delivery_requested && (
                 <tr className="border-b">
                   <td className="py-3">Home Delivery</td>
                   <td className="py-3 text-right">-</td>
-                  <td className="py-3 text-right">Included Add-on</td>
+                  <td className="py-3 text-right">Rs. {DELIVERY_ADDON.toLocaleString()}</td>
                 </tr>
               )}
               <tr>

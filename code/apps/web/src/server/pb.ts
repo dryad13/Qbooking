@@ -3,13 +3,18 @@ import { cookies } from 'next/headers';
 
 const PB_URL = process.env.NEXT_PUBLIC_BACKEND_URL || 'http://127.0.0.1:8090';
 
-// For server actions requiring admin privileges (like generating OTPs)
 export async function getAdminPb() {
+  const adminEmail = process.env.PB_ADMIN_EMAIL;
+  const adminPassword = process.env.PB_ADMIN_PASSWORD;
+
+  if (!adminEmail || !adminPassword) {
+    throw new Error('PB_ADMIN_EMAIL and PB_ADMIN_PASSWORD must be set in .env.local');
+  }
+
   const pb = new PocketBase(PB_URL);
-  // Auto Cancellation: In a real app, you might want to disable autoCancellation or handle it per request
   pb.autoCancellation(false);
-  
-  await pb.admins.authWithPassword('admin@example.com', 'password123');
+
+  await pb.admins.authWithPassword(adminEmail, adminPassword);
   return pb;
 }
 

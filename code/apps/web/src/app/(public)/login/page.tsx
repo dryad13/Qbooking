@@ -56,11 +56,6 @@ export default function LoginPage() {
                 className="text-lg"
               />
             </div>
-            {process.env.NEXT_PUBLIC_MOCK_OTP_CODE && (
-               <div className="text-xs text-center text-muted-foreground">
-                 Demo OTP is: {process.env.NEXT_PUBLIC_MOCK_OTP_CODE}
-               </div>
-            )}
           </CardContent>
           <CardFooter>
             <Button type="submit" className="w-full" disabled={loading}>
