@@ -1,7 +1,7 @@
 import PocketBase from 'pocketbase';
 import { cookies } from 'next/headers';
 
-const PB_URL = process.env.NEXT_PUBLIC_BACKEND_URL || 'http://127.0.0.1:8090';
+const PB_URL = process.env.NEXT_PUBLIC_BACKEND_URL || process.env.NEXT_PUBLIC_POCKETBASE_URL || process.env.POCKETBASE_INTERNAL_URL || 'http://127.0.0.1:8090';
 
 export async function getAdminPb() {
   const adminEmail = process.env.PB_ADMIN_EMAIL;
