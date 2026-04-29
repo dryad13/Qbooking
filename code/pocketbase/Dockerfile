@@ -10,9 +10,7 @@ RUN apk add --no-cache \
 ADD https://github.com/pocketbase/pocketbase/releases/download/v${PB_VERSION}/pocketbase_${PB_VERSION}_linux_amd64.zip /tmp/pb.zip
 RUN unzip /tmp/pb.zip -d /pb/
 
-# The pb_data directory will be mounted as a persistent volume in Render
-VOLUME /pb/pb_data
-
+# Data will be stored inside the container and wiped on restart (free tier demo)
 EXPOSE 8090
 
 # Start PocketBase. It will bind to 0.0.0.0 so Render can route traffic to it.

@@ -7,12 +7,8 @@ services:
     env: docker
     dockerContext: code/pocketbase
     dockerfilePath: code/pocketbase/Dockerfile
-    plan: starter # Requires a paid plan to attach disks
+    plan: free # Using free tier for demo
     region: frankfurt # Pick a region close to your users
-    disk:
-      name: pb_data
-      mountPath: /pb/pb_data
-      sizeGB: 1
     envVars:
       # Optional: any internal PB vars if needed
 
