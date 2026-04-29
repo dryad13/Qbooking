@@ -1,0 +1,46 @@
+services:
+  # ----------------------------------------
+  # Backend: PocketBase
+  # ----------------------------------------
+  - type: web
+    name: qurbani-backend
+    env: docker
+    dockerContext: code/pocketbase
+    dockerfilePath: code/pocketbase/Dockerfile
+    plan: starter # Requires a paid plan to attach disks
+    region: frankfurt # Pick a region close to your users
+    disk:
+      name: pb_data
+      mountPath: /pb/pb_data
+      sizeGB: 1
+    envVars:
+      # Optional: any internal PB vars if needed
+
+  # ----------------------------------------
+  # Frontend: Next.js App
+  # ----------------------------------------
+  - type: web
+    name: qurbani-frontend
+    env: node
+    rootDir: code/apps/web
+    buildCommand: npm install && npm run build
+    startCommand: npm run start
+    plan: free # Frontend can run on the free tier if desired
+    region: frankfurt # Match the backend region
+    envVars:
+      # Render automatically provides an internal URL for services in the same environment.
+      # We use this so server actions (Node) talk directly to PB without hitting the public internet.
+      - key: PB_RAW_HOSTNAME
+        fromService:
+          type: web
+          name: qurbani-backend
+          envVarKey: RENDER_INTERNAL_HOSTNAME
+      - key: POCKETBASE_INTERNAL_URL
+        value: "http://${PB_RAW_HOSTNAME}:8090"
+        
+      # The public URL for any client-side PB calls (if any)
+      - key: NEXT_PUBLIC_POCKETBASE_URL
+        fromService:
+          type: web
+          name: qurbani-backend
+          envVarKey: RENDER_EXTERNAL_URL

@@ -1,0 +1,20 @@
+node_modules/
+.next/
+out/
+build/
+.env*.local
+
+# PocketBase
+code/pocketbase/pocketbase
+code/pocketbase/pb_data/
+
+# OS files
+.DS_Store
+
+# Cursor/IDE
+.cursor/
+.vscode/
+
+# Temp Media
+.tempmediaStorage/
+.gemini/
