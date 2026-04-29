@@ -26,7 +26,12 @@ services:
     envVars:
       # Render automatically provides an internal URL for services in the same environment.
       # We use this so server actions (Node) talk directly to PB without hitting the public internet.
+      - key: PB_HOST
+        fromService:
+          type: web
+          name: qurbani-backend
+          property: host
       - key: POCKETBASE_INTERNAL_URL
         value: "http://qurbani-backend:8090"
       - key: NEXT_PUBLIC_POCKETBASE_URL
-        value: "https://qurbani-backend.onrender.com"
+        value: "https://${PB_HOST}"
