@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Check } from "lucide-react";
+import Image from "next/image";
 
 export default function LandingPage() {
   return (
@@ -10,6 +11,7 @@ export default function LandingPage() {
       {/* Navigation */}
       <header className="px-4 lg:px-6 h-16 flex items-center border-b bg-background sticky top-0 z-50">
         <Link className="flex items-center justify-center" href="/">
+          <Image src="/logo.jpeg" alt="QC Logo" width={48} height={48} className="mr-2" />
           <span className="font-bold text-xl text-primary">99 Cattle Farm</span>
         </Link>
         <nav className="ml-auto flex gap-4 sm:gap-6 items-center">

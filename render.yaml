@@ -35,3 +35,5 @@ services:
         value: "http://qurbani-backend:8090"
       - key: NEXT_PUBLIC_POCKETBASE_URL
         value: "https://${PB_HOST}"
+      - key: NEXT_PUBLIC_BACKEND_URL
+        value: "https://${PB_HOST}"
