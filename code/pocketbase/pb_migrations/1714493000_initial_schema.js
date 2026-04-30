@@ -134,7 +134,8 @@ migrate((db) => {
     }
   ];
 
-  return db.importCollections(collections, false);
+  const dao = new Dao(db);
+  return dao.importCollections(collections, false, null);
 }, (db) => {
   // down migration
 });
