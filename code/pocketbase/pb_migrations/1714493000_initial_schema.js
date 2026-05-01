@@ -5,7 +5,7 @@ migrate((app) => {
       "name": "users",
       "type": "auth",
       "system": false,
-      "schema": [
+      "fields": [
         { "id": "field_u_phone", "name": "phone", "type": "text", "system": false, "required": true, "presentable": false, "unique": true, "options": { "min": null, "max": null, "pattern": "" } },
         { "id": "field_u_otp_code", "name": "otp_code", "type": "text", "system": false, "required": false, "presentable": false, "unique": false, "options": { "min": null, "max": null, "pattern": "" } },
         { "id": "field_u_otp_exp", "name": "otp_expires_at", "type": "date", "system": false, "required": false, "presentable": false, "unique": false, "options": { "min": "", "max": "" } },
@@ -25,7 +25,7 @@ migrate((app) => {
       "name": "bookings",
       "type": "base",
       "system": false,
-      "schema": [
+      "fields": [
         { "id": "field_b_reference", "name": "booking_reference", "type": "text", "system": false, "required": true, "unique": true, "options": { "min": null, "max": null, "pattern": "" } },
         { "id": "field_b_customer", "name": "customer_id", "type": "relation", "system": false, "required": true, "presentable": false, "unique": false, "options": { "collectionId": "_pb_users_auth_", "cascadeDelete": false, "minSelect": null, "maxSelect": 1, "displayFields": null } },
         { "id": "field_b_created_by", "name": "created_by", "type": "relation", "system": false, "required": false, "presentable": false, "unique": false, "options": { "collectionId": "_pb_users_auth_", "cascadeDelete": false, "minSelect": null, "maxSelect": 1, "displayFields": null } },
@@ -57,7 +57,7 @@ migrate((app) => {
       "name": "kyc_documents",
       "type": "base",
       "system": false,
-      "schema": [
+      "fields": [
         { "id": "field_k_booking", "name": "booking_id", "type": "relation", "system": false, "required": true, "presentable": false, "unique": false, "options": { "collectionId": "bookings_coll", "cascadeDelete": true, "minSelect": null, "maxSelect": 1, "displayFields": null } },
         { "id": "field_k_customer", "name": "customer_id", "type": "relation", "system": false, "required": true, "presentable": false, "unique": false, "options": { "collectionId": "_pb_users_auth_", "cascadeDelete": false, "minSelect": null, "maxSelect": 1, "displayFields": null } },
         { "id": "field_k_id_number", "name": "id_number", "type": "text", "system": false, "required": false, "presentable": false, "unique": false, "options": { "min": null, "max": null, "pattern": "" } },
@@ -79,7 +79,7 @@ migrate((app) => {
       "name": "payments",
       "type": "base",
       "system": false,
-      "schema": [
+      "fields": [
         { "id": "field_p_booking", "name": "booking_id", "type": "relation", "system": false, "required": true, "presentable": false, "unique": false, "options": { "collectionId": "bookings_coll", "cascadeDelete": true, "minSelect": null, "maxSelect": 1, "displayFields": null } },
         { "id": "field_p_customer", "name": "customer_id", "type": "relation", "system": false, "required": true, "presentable": false, "unique": false, "options": { "collectionId": "_pb_users_auth_", "cascadeDelete": false, "minSelect": null, "maxSelect": 1, "displayFields": null } },
         { "id": "field_p_amount", "name": "amount", "type": "number", "system": false, "required": false, "presentable": false, "unique": false, "options": { "min": null, "max": null, "noDecimal": false } },
@@ -100,7 +100,7 @@ migrate((app) => {
       "name": "audit_logs",
       "type": "base",
       "system": false,
-      "schema": [
+      "fields": [
         { "id": "field_l_actor", "name": "actor_id", "type": "text", "system": false, "required": false, "presentable": false, "unique": false, "options": { "min": null, "max": null, "pattern": "" } },
         { "id": "field_l_ent_type", "name": "entity_type", "type": "text", "system": false, "required": false, "presentable": false, "unique": false, "options": { "min": null, "max": null, "pattern": "" } },
         { "id": "field_l_ent_id", "name": "entity_id", "type": "text", "system": false, "required": false, "presentable": false, "unique": false, "options": { "min": null, "max": null, "pattern": "" } },
@@ -122,7 +122,7 @@ migrate((app) => {
       "name": "notifications_log",
       "type": "base",
       "system": false,
-      "schema": [
+      "fields": [
         { "id": "field_n_type", "name": "type", "type": "text", "system": false, "required": false, "presentable": false, "unique": false, "options": { "min": null, "max": null, "pattern": "" } },
         { "id": "field_n_booking", "name": "booking_id", "type": "text", "system": false, "required": false, "presentable": false, "unique": false, "options": { "min": null, "max": null, "pattern": "" } },
         { "id": "field_n_customer", "name": "customer_id", "type": "text", "system": false, "required": false, "presentable": false, "unique": false, "options": { "min": null, "max": null, "pattern": "" } },
