@@ -6,12 +6,25 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { requestOtp } from "@/server/actions/auth";
+import { requestOtp, demoLogin } from "@/server/actions/auth";
 
 export default function LoginPage() {
   const [loading, setLoading] = useState(false);
+  const [demoLoading, setDemoLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const router = useRouter();
+
+  async function handleDemoLogin() {
+    setDemoLoading(true);
+    setError(null);
+    const res = await demoLogin();
+    if (res?.error) {
+      setError(res.error);
+      setDemoLoading(false);
+    } else {
+      router.push('/dashboard');
+    }
+  }
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -58,9 +71,14 @@ export default function LoginPage() {
             </div>
           </CardContent>
           <CardFooter>
-            <Button type="submit" className="w-full" disabled={loading}>
-              {loading ? "Sending..." : "Send OTP"}
-            </Button>
+            <div className="w-full space-y-2">
+              <Button type="submit" className="w-full" disabled={loading || demoLoading}>
+                {loading ? "Sending..." : "Send OTP"}
+              </Button>
+              <Button type="button" variant="outline" className="w-full" disabled={loading || demoLoading} onClick={handleDemoLogin}>
+                {demoLoading ? "Logging in..." : "Demo Login (skip OTP)"}
+              </Button>
+            </div>
           </CardFooter>
         </form>
       </Card>

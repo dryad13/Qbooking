@@ -52,6 +52,52 @@ export async function requestOtp(formData: FormData) {
   }
 }
 
+export async function demoLogin() {
+  const DEMO_PHONE = "03000000000";
+  const DEMO_PASSWORD = "DemoPass1!";
+
+  try {
+    const pb = await getAdminPb();
+
+    let user;
+    try {
+      user = await pb.collection('users').getFirstListItem(`phone="${DEMO_PHONE}"`);
+      await pb.collection('users').update(user.id, {
+        password: DEMO_PASSWORD,
+        passwordConfirm: DEMO_PASSWORD,
+        is_phone_verified: true,
+      });
+    } catch {
+      user = await pb.collection('users').create({
+        phone: DEMO_PHONE,
+        name: "Demo User",
+        role: "customer",
+        password: DEMO_PASSWORD,
+        passwordConfirm: DEMO_PASSWORD,
+        is_phone_verified: true,
+      });
+    }
+
+    const userPb = new (await import('pocketbase')).default(
+      process.env.NEXT_PUBLIC_BACKEND_URL || process.env.NEXT_PUBLIC_POCKETBASE_URL || 'http://127.0.0.1:8090'
+    );
+    userPb.autoCancellation(false);
+    await userPb.collection('users').authWithPassword(DEMO_PHONE, DEMO_PASSWORD);
+
+    cookies().set('pb_auth', userPb.authStore.exportToCookie(), {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'lax',
+      path: '/'
+    });
+
+    return { success: true };
+  } catch (error: any) {
+    console.error("[DEMO LOGIN ERROR]", error);
+    return { error: error.message || "Demo login failed." };
+  }
+}
+
 export async function verifyOtp(formData: FormData) {
   const phone = formData.get("phone") as string;
   const otp = formData.get("otp") as string;
