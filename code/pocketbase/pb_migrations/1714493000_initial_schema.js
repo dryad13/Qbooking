@@ -44,7 +44,7 @@ migrate((db) => {
         { "id": "field_b_slot", "name": "slaughter_slot", "type": "date", "system": false, "required": false, "presentable": false, "unique": false, "options": { "min": "", "max": "" } },
         { "id": "field_b_notes", "name": "notes", "type": "text", "system": false, "required": false, "presentable": false, "unique": false, "options": { "min": null, "max": null, "pattern": "" } }
       ],
-      "indexes": [ "CREATE UNIQUE INDEX `idx_bkg_ref` ON `bookings` (`booking_reference`)" ],
+      "indexes": [],
       "listRule": "@request.auth.id = customer_id || @request.auth.role = 'admin'",
       "viewRule": "@request.auth.id = customer_id || @request.auth.role = 'admin'",
       "createRule": "@request.auth.id != ''",
