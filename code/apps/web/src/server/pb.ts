@@ -14,7 +14,7 @@ export async function getAdminPb() {
   const pb = new PocketBase(PB_URL);
   pb.autoCancellation(false);
 
-  await pb.admins.authWithPassword(adminEmail, adminPassword);
+  await pb.collection('_superusers').authWithPassword(adminEmail, adminPassword);
   return pb;
 }
 
