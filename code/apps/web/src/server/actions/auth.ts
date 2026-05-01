@@ -20,17 +20,13 @@ export async function requestOtp(formData: FormData) {
       user = await pb.collection('users').getFirstListItem(`phone="${phone}"`);
     } catch (e) {
       // Create user if not found
+      const tempPw = Math.random().toString(36).slice(-8) + Math.random().toString(36).slice(-4).toUpperCase() + '1!';
       user = await pb.collection('users').create({
         phone,
-        name: `User ${phone.slice(-4)}`, // Placeholder name
+        name: `User ${phone.slice(-4)}`,
         role: 'customer',
-        password: Math.random().toString(36).slice(-8), // Dummy password since we use OTP
-        passwordConfirm: '',
-      });
-      // PocketBase requires passwordConfirm to match password
-      await pb.collection('users').update(user.id, {
-        password: user.password,
-        passwordConfirm: user.password
+        password: tempPw,
+        passwordConfirm: tempPw,
       });
     }
 
