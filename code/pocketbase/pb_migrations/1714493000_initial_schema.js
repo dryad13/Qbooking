@@ -12,7 +12,7 @@ migrate((db) => {
         { "id": "field_u_user_role", "name": "role", "type": "select", "system": false, "required": false, "presentable": false, "unique": false, "options": { "maxSelect": 1, "values": ["customer", "admin"] } },
         { "id": "field_u_is_verified", "name": "is_phone_verified", "type": "bool", "system": false, "required": false, "presentable": false, "unique": false, "options": {} }
       ],
-      "indexes": [ "CREATE UNIQUE INDEX `idx_user_phone` ON `users` (`phone`)" ],
+      "indexes": [],
       "listRule": "id = @request.auth.id",
       "viewRule": "id = @request.auth.id",
       "createRule": "",
