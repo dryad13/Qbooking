@@ -1,4 +1,4 @@
-migrate((db) => {
+migrate((app) => {
   const collections = [
     {
       "id": "_pb_users_auth_",
@@ -141,8 +141,7 @@ migrate((db) => {
     }
   ];
 
-  const dao = new Dao(db);
-  return dao.importCollections(collections, false, null);
-}, (db) => {
+  return app.importCollections(collections, false);
+}, (app) => {
   // down migration
 });
